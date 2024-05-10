@@ -63,7 +63,8 @@ const betIndexToPosition = [
   'bottom'
 ]
 
-let currentBets = bets.toSorted(() => 0.5 - Math.random()).slice(0, 4)
+const shuffleBets = () => bets.toSorted(() => 0.5 - Math.random()).slice(0, 4)
+let currentBets = shuffleBets()
 let winningBet = null
 
 //@ts-ignore
@@ -75,7 +76,13 @@ document.querySelector('#app').innerHTML = `
         setTimeout(() => {
           winningBet = null
           setTimeout(() => {
-            currentBets = bets.toSorted(() => 0.5 - Math.random()).slice(0, 4)
+            currentBets = shuffleBets()
+            setTimeout(() => {
+              currentBets = shuffleBets()
+              setTimeout(() => {
+                currentBets = shuffleBets()
+              }, 100)
+            }, 100)
           }, 300)
         }, 1000)
       })

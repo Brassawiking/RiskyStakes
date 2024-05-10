@@ -50,6 +50,7 @@ body {
   overflow: clip;
   overflow-clip-margin: content-box;
   rotate: 45deg;
+  box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
 
   .pie {
     color: #fff;
@@ -58,6 +59,7 @@ body {
     container-type: size;
     box-shadow: inset 0px 0px 1cqh rgba(0, 0, 0, 0.75);
     transition-duration: 200ms;
+    scale: 1;
 
     &.winner {
       scale: 1.5;
