@@ -16,23 +16,28 @@ body {
 #app {
   height: 100%;
   padding: 10px;
-  box-sizing: border-box;;
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
 .table {
   background: #fff;
   display: inline-grid;
-  grid-template-columns: repeat(3, 64px);
+  grid-template-columns: repeat(3, auto);
   border: 2px solid #fff;
   gap: 2px;
   border-radius: 22px;
   overflow: hidden;
+  aspect-ratio: 0.5;
 
   .number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #fff;
-    line-height: 40px;
-    text-align: center;;
-
 
     &.red {
       background: #bb0010;
@@ -45,6 +50,7 @@ body {
     &.green {
       background: #098c4b;
       grid-column: 1/-1;
+      aspect-ratio: auto;
     }
   }
 }
@@ -85,4 +91,5 @@ body {
   display: inline-grid;
   grid-template-columns: repeat(2, auto);
   gap: 20px;
+  align-self: flex-start;
 }
