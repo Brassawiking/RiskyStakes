@@ -72,6 +72,8 @@ document.querySelector('#app').innerHTML = `
   <div class="left-side">
     <div class="wheel" ${ref()
       .on('click', () => {
+        if (winningBet) return
+        
         winningBet = currentBets[Math.floor(Math.random() * 4)]
         setTimeout(() => {
           winningBet = null
