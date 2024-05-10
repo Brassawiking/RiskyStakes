@@ -1,3 +1,7 @@
+html, body {
+  overscroll-behavior: none;
+}
+
 body {
   background: #25553c;
   margin: 0;
