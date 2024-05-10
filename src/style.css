@@ -22,7 +22,7 @@ body {
 
   display: flex;
   justify-content: center;
-  gap: 32px;
+  gap: 10px;
   aspect-ratio: 0.6;
   max-width: 100%;
   margin: auto;
@@ -84,7 +84,7 @@ body {
       align-items: center;
       justify-content: center;
       text-align: center;
-      font-size: 20cqh;
+      font-size: 23cqh;
       line-height: 1;
     }
   }
@@ -132,7 +132,7 @@ body {
 }
 
 .table {
-  flex: 2 1 0;
+  flex: 1.2 1 0;
   min-width: 0;
 
   background: #fff;
