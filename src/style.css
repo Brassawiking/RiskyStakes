@@ -38,6 +38,7 @@ body {
     align-items: center;
     justify-content: center;
     color: #fff;
+    font-size: 3vh;
 
     &.red {
       background: #bb0010;
