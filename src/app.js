@@ -32,66 +32,82 @@ tableNumbers.push({
 
 /** @type {{ value: number }[]}} */
 const playerChips = [
-  { value: 100 },
-  { value: 200 },
   { value: 300 },
-  { value: 400 },
-  { value: 500 },
-  { value: 9000 },
-  { value: 10000 },
+  { value: 300 },
+  { value: 300 },
+  { value: 300 },
+  { value: 300 },
 ]
 
-/** @type {{ type: string }[]}} */
-const payouts = [
-  {
-    type: 'even',
-  },
-  {
-    type: 'odd',
-  },
-  {
-    type: 'red',
-  },
-  {
-    type: 'black',
-  },
-  {
-    type: 'zeros',
-  },
+/** @type {{ type: string, name: string, payout: number }[]}} */
+const bets = [
+  { type: 'even', name: 'Even', payout: 1 },
+  { type: 'odd', name: 'Odd', payout: 1 },
+  { type: 'red', name: 'Red', payout: 1 },
+  { type: 'black', name: 'Black', payout: 1 },
+  { type: 'green', name: 'Green', payout: 10 },
+  { type: 'half', name: '1 to 18', payout: 1 },
+  { type: 'half', name: '19 to 36', payout: 1 },
+  { type: 'dozen', name: '1st 12', payout: 2 },
+  { type: 'dozen', name: '2nd 12', payout: 2 },
+  { type: 'dozen', name: '3rd 12', payout: 2 },
+  { type: 'column', name: '1st Column', payout: 2 },
+  { type: 'column', name: '2nd Column', payout: 2 },
+  { type: 'column', name: '3rd Column', payout: 2 },
 ]
 
-const pieIndexToPosition = [
+const betIndexToPosition = [
   'top',
   'right',
   'left',
   'bottom'
 ]
 
-let currentWheel = payouts.toSorted(() => 0.5 - Math.random()).slice(0, 4)
+let currentBets = bets.toSorted(() => 0.5 - Math.random()).slice(0, 4)
+let winningBet = null
 
 //@ts-ignore
 document.querySelector('#app').innerHTML = `
   <div class="left-side">
     <div class="wheel" ${ref()
       .on('click', () => {
-        currentWheel = payouts.toSorted(() => 0.5 - Math.random()).slice(0, 4)
+        winningBet = currentBets[Math.floor(Math.random() * 4)]
+        setTimeout(() => {
+          winningBet = null
+          setTimeout(() => {
+            currentBets = bets.toSorted(() => 0.5 - Math.random()).slice(0, 4)
+          }, 300)
+        }, 1000)
       })
     }>
       ${repeat(
-        () => currentWheel, 
-        (pie) => `
+        () => currentBets, 
+        (bet) => `
           <div ${ref()
-            .property('className', () => `pie ${pie.type} ${pieIndexToPosition[currentWheel.indexOf(pie)]}`)
+            .property('className', () => `pie ${bet.type} ${betIndexToPosition[currentBets.indexOf(bet)]}`)
+            .class('winner', () => bet === winningBet)
           }>
             <div class="payout">
-              ${pie.type}
-              <br/>
-              1:1
+              ${bet.name}
+              <div style="font-weight: 200;">
+                +${bet.payout}00
+              </div>
             </div>
           </div>
         `
       )}
     </div>
+
+    <hr style="width: 100%;"/>
+    
+    <div style="color: #fff; text-align: center;">
+      Turns: 10
+    </div>
+    <div style="color: #fff; text-align: center;">
+      Placements: 5
+    </div>
+    
+    <hr style="width: 100%;"/>
 
     <div class="player-stash">
       ${repeat(() => playerChips, (chip) => `
