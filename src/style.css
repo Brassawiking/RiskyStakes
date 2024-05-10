@@ -1,7 +1,7 @@
 body {
   background: #25553c;
   margin: 0;
-  height: 100vh;
+  height: 100dvh;
 
   font-family: "Josefin Sans", sans-serif;
   font-optical-sizing: auto;
