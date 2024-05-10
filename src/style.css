@@ -1,5 +1,6 @@
 html, body {
   overscroll-behavior: none;
+  user-select: none;
 }
 
 body {
@@ -26,7 +27,7 @@ body {
 .table {
   background: #fff;
   display: inline-grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(3, 1fr);
   border: 2px solid #fff;
   gap: 2px;
   border-radius: 22px;
