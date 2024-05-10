@@ -1,0 +1,84 @@
+body {
+  background: #25553c;
+  margin: 0;
+  height: 100vh;
+
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#app {
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;;
+}
+
+.table {
+  background: #fff;
+  display: inline-grid;
+  grid-template-columns: repeat(3, 64px);
+  border: 2px solid #fff;
+  gap: 2px;
+  border-radius: 22px;
+  overflow: hidden;
+
+  .number {
+    color: #fff;
+    line-height: 40px;
+    text-align: center;;
+
+
+    &.red {
+      background: #bb0010;
+    }
+
+    &.black {
+      background: #000000;
+    }
+
+    &.green {
+      background: #098c4b;
+      grid-column: 1/-1;
+    }
+  }
+}
+
+.chip {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  box-sizing: border-box;
+  border-radius: 999px;
+  background: #fff;
+  align-items: center;
+  justify-content: center;
+  border: 6px solid #122a72;
+  position: relative;
+  font-size: 13px;
+  font-weight: 700;
+
+  transition-duration: 200ms;
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5);
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    inset: -6px;
+    border: 2px dashed #fff;
+    border-radius: inherit;
+  }
+
+  &:focus {
+    transform: translateY(-5px);
+    box-shadow: 5px 7px 3px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.player-stash {
+  display: inline-grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 20px;
+}
