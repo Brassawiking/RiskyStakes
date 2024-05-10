@@ -32,7 +32,7 @@ body {
   gap: 2px;
   border-radius: 22px;
   overflow: hidden;
-  aspect-ratio: 0.5;
+  aspect-ratio: 0.325;
   container-type: size;
 
   .number {
@@ -40,7 +40,7 @@ body {
     align-items: center;
     justify-content: center;
     color: #fff;
-    font-size: 4cqh;
+    font-size: 3.25cqh;
 
     &.red {
       background: #bb0010;
