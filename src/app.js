@@ -100,11 +100,11 @@ let currentBets = shuffleBets()
 let winningBet = null
 let spinningWheel = false
 
-document.addEventListener('click', () => {
-  const music = new Audio('https://opengameart.org/sites/default/files/audio_preview/CVP701Jam.ogg.mp3') // https://opengameart.org/content/funky-hip-hop-lofi-jam
-  music.loop = true
-  music.play()
-}, { once: true })
+// document.addEventListener('click', () => {
+//   const music = new Audio('https://opengameart.org/sites/default/files/audio_preview/CVP701Jam.ogg.mp3') // https://opengameart.org/content/funky-hip-hop-lofi-jam
+//   music.loop = true
+//   music.play()
+// }, { once: true })
 
 const soundEffects = {
   winningBet: new Audio('https://opengameart.org/sites/default/files/_coin_pickup.mp3'), // https://opengameart.org/content/quest-for-stoken-sounds
