@@ -56,7 +56,7 @@ const placeOpponent = () => {
 
   for (let i = 0 ; i < 3 + Math.floor(match / 5) ; ++i) {
     opponentChips.push({
-      value: 100 * (i + 1), 
+      value: 100 * (i + match), 
       owner: 'timmy'
     })
   }
@@ -118,8 +118,8 @@ const playSound = (/** @type {string}} */ source) => {
   sfx.play()
 }
 
-let turnsPerMatch = 10
-let turns = turnsPerMatch
+let additionalTurnsPerMatch = 5
+let turns = additionalTurnsPerMatch
 let placementsPerTurn = 5
 let placements = placementsPerTurn
 
@@ -148,7 +148,7 @@ document.querySelector('#app').innerHTML = `
               case 'green': return tableNumber.color === 'green'
               case 'half': return +tableNumber.value >= 1 + 18 * winningBet.value && +tableNumber.value <= 18 * (winningBet.value + 1)
               case 'dozen': return +tableNumber.value >= 1 + 12 * winningBet.value && +tableNumber.value <= 12 * (winningBet.value + 1)
-              case 'column': return +tableNumber.value >= 1 && +tableNumber.value <= 36 && +tableNumber.value % 3 === winningBet.value + 1
+              case 'column': return +tableNumber.value >= 1 && +tableNumber.value <= 36 && (+tableNumber.value - 1) % 3 === winningBet.value
             }
           }
 
@@ -228,7 +228,7 @@ document.querySelector('#app').innerHTML = `
 
         if (!playersRemaining.has('timmy')) {
           match++
-          turns = turnsPerMatch
+          turns += additionalTurnsPerMatch
           placeOpponent()
         } else if (turns <= 0) {
           alert('You lost =(')
@@ -262,7 +262,7 @@ document.querySelector('#app').innerHTML = `
       Turns: ${text(() => turns)}
     </div>
     <div style="color: #fff; text-align: center;">
-      Placements: ${text(() => placements)}
+      Bet placements: ${text(() => placements)}
     </div>
     
     <hr style="width: 100%;"/>
