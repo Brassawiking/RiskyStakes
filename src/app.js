@@ -46,20 +46,29 @@ let playerChips = [
   { value: 500, owner: 'player' },
 ]
 
-/** @type {chip[]}} */
-let opponentChips = [
-  { value: 100, owner: 'timmy' },
-  { value: 100, owner: 'timmy' },
-  { value: 200, owner: 'timmy' },
-]
+let match = 1
 
-const opponentPlacements = tableNumbers.map((_, index) => index).toSorted(() => 0.5 - Math.random())
+const placeOpponent = () => {
+  const opponentPlacements = tableNumbers.map((_, index) => index).toSorted(() => 0.5 - Math.random())
 
-let i = 0
-while (opponentChips.length) {
-  tableNumbers[opponentPlacements[i]].chips.push(/** @type {chip} */(opponentChips.shift()))
-  i++
+  /** @type {chip[]}} */
+  let opponentChips = []
+
+  for (let i = 0 ; i < 3 + Math.floor(match / 5) ; ++i) {
+    opponentChips.push({
+      value: 100 * (i + 1), 
+      owner: 'timmy'
+    })
+  }
+
+  let i = 0
+  while (opponentChips.length) {
+    tableNumbers[opponentPlacements[i]].chips.push(/** @type {chip} */(opponentChips.shift()))
+    i++
+  }
 }
+
+placeOpponent()
 
 /** @type {{ type: string, value?: number, name: string, payout: number }[]}} */
 const bets = [
@@ -109,7 +118,8 @@ const playSound = (/** @type {string}} */ source) => {
   sfx.play()
 }
 
-let turns = 10
+let turnsPerMatch = 10
+let turns = turnsPerMatch
 let placementsPerTurn = 5
 let placements = placementsPerTurn
 
@@ -215,6 +225,14 @@ document.querySelector('#app').innerHTML = `
         currentBets = shuffleBets()
 
         spinningWheel = false
+
+        if (!playersRemaining.has('timmy')) {
+          match++
+          turns = turnsPerMatch
+          placeOpponent()
+        } else if (turns <= 0) {
+          alert('You lost =(')
+        }
       })
     }>
       ${repeat(
@@ -237,6 +255,9 @@ document.querySelector('#app').innerHTML = `
 
     <hr style="width: 100%;"/>
     
+    <div style="color: #fff; text-align: center;">
+      Match: ${text(() => match)}
+    </div>
     <div style="color: #fff; text-align: center;">
       Turns: ${text(() => turns)}
     </div>
