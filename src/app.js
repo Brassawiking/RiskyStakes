@@ -100,21 +100,18 @@ let currentBets = shuffleBets()
 let winningBet = null
 let spinningWheel = false
 
-const soundEffectsSources = {
-  winningBet: 'https://opengameart.org/sites/default/files/_coin_pickup.mp3', // https://opengameart.org/content/quest-for-stoken-sounds
-  shuffle: 'https://opengameart.org/sites/default/files/audio_preview/spinning.ogg.mp3', // https://opengameart.org/content/spinning-wheel-0
-  payout: 'https://opengameart.org/sites/default/files/audio_preview/coinsplash.ogg.mp3', // https://opengameart.org/content/coin-splash
-  contestWinner: 'https://opengameart.org/sites/default/files/untitled_7.mp3', // https://opengameart.org/content/boom-effect-sound
-  placement: 'https://opengameart.org/sites/default/files/audio_preview/1_Coins_0.ogg.mp3' //https://opengameart.org/content/coins-sounds
+const soundEffects = {
+  winningBet: new Audio('https://opengameart.org/sites/default/files/_coin_pickup.mp3'), // https://opengameart.org/content/quest-for-stoken-sounds
+  shuffle: new Audio('https://opengameart.org/sites/default/files/audio_preview/spinning.ogg.mp3'), // https://opengameart.org/content/spinning-wheel-0
+  payout: new Audio('https://opengameart.org/sites/default/files/audio_preview/coinsplash.ogg.mp3'), // https://opengameart.org/content/coin-splash
+  contestWinner: new Audio('https://opengameart.org/sites/default/files/untitled_7.mp3'), // https://opengameart.org/content/boom-effect-sound
+  placement: new Audio('https://opengameart.org/sites/default/files/audio_preview/1_Coins_0.ogg.mp3') //https://opengameart.org/content/coins-sounds
+
 }
 
-//preload sound
-for (const source in soundEffectsSources) {
-  new Audio(soundEffectsSources[source])
-}
-
-const playSound = (/** @type {string}} */ source) => {
-  const sfx = new Audio(soundEffectsSources[source])
+const playSound = (/** @type {string}} */ name) => {
+  const sfx = soundEffects[name]
+  sfx.currentTime = 0
   sfx.play()
 }
 
