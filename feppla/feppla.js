@@ -63,6 +63,7 @@ export const ref = (explicitNode) => {
         const newValue = valueFunc(el)
         if (!equalsFunc(newValue, oldValue)) {
           setter(el, newValue, oldValue)
+          // TODO: push array will not work as oldValue will still be same reference to newValue
           oldValue = newValue
         }
       })
