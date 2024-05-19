@@ -138,6 +138,8 @@ body {
   transition-duration: 250ms;
   box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5);
 
+  zoom: 0.75;
+
   &:before {
     content: '';
     display: block;
@@ -147,6 +149,7 @@ body {
     border-radius: inherit;
   }
 
+  &.selected,
   &.winner,
   &.payout {
     transform: translateY(-5px);

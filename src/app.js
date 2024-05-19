@@ -38,16 +38,16 @@ tableNumbers.push({
 
 
 /** @type {chip[]}} */
-const playerChips = [
+let playerChips = [
+  { value: 100, owner: 'player' },
+  { value: 200, owner: 'player' },
   { value: 300, owner: 'player' },
-  { value: 300, owner: 'player' },
-  { value: 300, owner: 'player' },
-  { value: 300, owner: 'player' },
-  { value: 300, owner: 'player' },
+  { value: 400, owner: 'player' },
+  { value: 500, owner: 'player' },
 ]
 
 /** @type {chip[]}} */
-const opponentChips = [
+let opponentChips = [
   { value: 100, owner: 'timmy' },
   { value: 100, owner: 'timmy' },
   { value: 200, owner: 'timmy' },
@@ -96,6 +96,7 @@ const soundEffectsSources = {
   shuffle: 'https://opengameart.org/sites/default/files/audio_preview/spinning.ogg.mp3', // https://opengameart.org/content/spinning-wheel-0
   payout: 'https://opengameart.org/sites/default/files/audio_preview/coinsplash.ogg.mp3', // https://opengameart.org/content/coin-splash
   contestWinner: 'https://opengameart.org/sites/default/files/untitled_7.mp3', // https://opengameart.org/content/boom-effect-sound
+  placement: 'https://opengameart.org/sites/default/files/audio_preview/1_Coins_0.ogg.mp3' //https://opengameart.org/content/coins-sounds
 }
 
 //preload sound
@@ -111,6 +112,9 @@ const playSound = (/** @type {string}} */ source) => {
 let turns = 10
 let placementsPerTurn = 5
 let placements = placementsPerTurn
+
+/** @type {chip | null}} */
+let selectedPlayerChip = null 
 
 //@ts-ignore
 document.querySelector('#app').innerHTML = `
@@ -254,10 +258,18 @@ document.querySelector('#app').innerHTML = `
         .class('contested', () => tableNumber.chips.length >= 2)
         .on('click', () => {
           if (placements <= 0) return
-          if (playerChips.length === 0) return
+          if (!selectedPlayerChip) return
           if (tableNumber.chips.find(x => x.owner === 'player')) return
-          
-          tableNumber.chips.push(/** @type {chip} */(playerChips.shift()))
+
+          playerChips = playerChips.filter(x => x !== selectedPlayerChip)
+          for (const tableNumber of tableNumbers) {
+            tableNumber.chips = tableNumber.chips.filter(x => x !== selectedPlayerChip)
+          }
+
+          tableNumber.chips.push(selectedPlayerChip)
+          placements--
+          selectedPlayerChip = null
+          playSound('placement')
         })
       }>
         <span class="text">${tableNumber.value}</span>
@@ -275,6 +287,13 @@ function Chip(chip) {
       .class('payout', () => chip.state === 'payout')
       .class('winner', () => chip.state === 'winner')
       .class('lost', () => chip.state === 'lost')
+      .class('selected', () => chip === selectedPlayerChip)
+      .on('click', () => {
+        if (chip.owner !== 'player') return
+        if (placements <= 0) return
+
+        selectedPlayerChip = selectedPlayerChip !== chip ? chip : null
+      })
     }>
       ${text(() => chip.value >= 10000 ? `${chip.value / 1000}K` : chip.value)}
     </div>
