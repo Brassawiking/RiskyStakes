@@ -1,7 +1,7 @@
 html, body {
   overscroll-behavior: none;
   user-select: none;
-
+  touch-action: none;
 }
 
 body {
