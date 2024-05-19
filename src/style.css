@@ -41,6 +41,7 @@ body {
   display: grid;
   box-sizing: border-box;
   grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 1fr;
   aspect-ratio: 1;
   border: 4cqw solid #6d370e;
   padding: 1cqw;
