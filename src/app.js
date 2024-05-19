@@ -100,13 +100,18 @@ let currentBets = shuffleBets()
 let winningBet = null
 let spinningWheel = false
 
+document.addEventListener('click', () => {
+  const music = new Audio('https://opengameart.org/sites/default/files/audio_preview/CVP701Jam.ogg.mp3') // https://opengameart.org/content/funky-hip-hop-lofi-jam
+  music.loop = true
+  music.play()
+}, { once: true })
+
 const soundEffects = {
   winningBet: new Audio('https://opengameart.org/sites/default/files/_coin_pickup.mp3'), // https://opengameart.org/content/quest-for-stoken-sounds
   shuffle: new Audio('https://opengameart.org/sites/default/files/audio_preview/spinning.ogg.mp3'), // https://opengameart.org/content/spinning-wheel-0
   payout: new Audio('https://opengameart.org/sites/default/files/audio_preview/coinsplash.ogg.mp3'), // https://opengameart.org/content/coin-splash
   contestWinner: new Audio('https://opengameart.org/sites/default/files/untitled_7.mp3'), // https://opengameart.org/content/boom-effect-sound
   placement: new Audio('https://opengameart.org/sites/default/files/audio_preview/1_Coins_0.ogg.mp3') //https://opengameart.org/content/coins-sounds
-
 }
 
 const playSound = (/** @type {string}} */ name) => {
